@@ -1,6 +1,6 @@
 let num;
 num = prompt('Введите возраст');
-if((isNaN(+num)) || ((typeof +num) !== 'number') || +num < 0) {
+if(isNaN(+num) || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
   const lastnum = num[num.length-1]
