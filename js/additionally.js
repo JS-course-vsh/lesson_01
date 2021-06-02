@@ -1,16 +1,12 @@
 let num;
-const arr1 = ['0', '5', '6', '6', '8', '9'];
-const arr2 = ['2', '3', '4'];
 num = prompt('Введите возраст');
-console.log(typeof +num)
-console.log( +num)
 if((isNaN(+num)) || ((typeof +num) !== 'number') || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
   const lastnum = num[num.length-1]
-  if(arr1.includes(lastnum) || (+lastnum >= 10 && +lastnum <= 20)) {
+  if(((+lastnum === 0) || (+lastnum >= 5 && +lastnum <= 9)) || (+num >= 5 && +num <= 20)) {
     alert(num + ' лет');
-  } else if(arr2.includes(lastnum)) {
+  } else if(+lastnum >= 2 && +lastnum <= 4) {
     alert(num + ' года')
   } else alert(num + ' год')
 }
