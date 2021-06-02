@@ -4,7 +4,7 @@ if(isNaN(+num) || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
   const lastnum = num[num.length-1]
-  if(((lastnum === '0') || (lastnum >= '5' && lastnum <= '9')) || (+num >= 5 && +num <= 20)) {
+  if(((lastnum === '0') || (lastnum >= '5' && lastnum <= '9')) || (+num >= 5 && +num <= 14)) {
     alert(num + ' лет');
   } else if(lastnum >= '2' && lastnum <= '4') {
     alert(num + ' года')
