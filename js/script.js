@@ -1,1 +1,1 @@
-console.log('Hello world');
+prompt('Ввведите число')
