@@ -1,5 +1,5 @@
 let num;
-num = prompt('Введите возраст');
+num = prompt('Введите число лет');
 if(isNaN(+num) || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
