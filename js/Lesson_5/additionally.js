@@ -1,13 +1,21 @@
 let num;
-num = prompt('Введите число лет');
+num = prompt('Введите число ярусов');
+
 if(isNaN(+num) || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
-  const lastnum = num[num.length-1];
-  const twolastnum = num.slice(-2)
-  if(((lastnum === '0') || (lastnum >= '5' && lastnum <= '9')) || (twolastnum >= '11' && twolastnum <= '14')) {
-    alert(num + ' лет');
-  } else if(lastnum >= '2' && lastnum <= '4') {
-    alert(num + ' года')
-  } else alert(num + ' год')
+  num = +num;
+  console.log(num);
+  let cnt = num * 2 - 1;
+  console.log(cnt)
+  let a = 0;
+  for(; a < cnt;) {
+    let str = '';
+    for(let i = 0; i <= a; i++) {
+      str += '*';
+    }
+    a++;
+    if(a % 2 === 0) continue;
+    console.log(str);
+  }
 }
