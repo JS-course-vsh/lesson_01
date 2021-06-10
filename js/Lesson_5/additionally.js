@@ -6,9 +6,7 @@ if(isNaN(+num) || +num < 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
   num = +num;
-  console.log(num);
   let cnt = num * 2 - 1;
-  console.log(cnt)
   let a = 0;
   for(; a < cnt;) {
     let str = '';
