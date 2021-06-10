@@ -1,4 +1,5 @@
 let num;
+let strout = '';
 num = prompt('Введите число ярусов');
 
 if(isNaN(+num) || +num < 0) {
@@ -13,9 +14,12 @@ if(isNaN(+num) || +num < 0) {
     let str = '';
     for(let i = 0; i <= a; i++) {
       str += '*';
+      str = str.padStart(parseInt((cnt-a)/2+1),' ');
     }
     a++;
     if(a % 2 === 0) continue;
+    strout = strout + str + '\n';
     console.log(str);
   }
 }
+alert(strout);
