@@ -16,7 +16,7 @@ if(isNaN(+num) || +num < 0) {
     }
     a++;
     if(a % 2 === 0) continue;
-    strout = strout + str + '\n';
+    strout += str + '\n';
     console.log(str);
   }
 }
