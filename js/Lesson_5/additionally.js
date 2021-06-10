@@ -14,7 +14,7 @@ if(isNaN(+num) || +num < 0) {
     let str = '';
     for(let i = 0; i <= a; i++) {
       str += '*';
-      str = str.padStart(parseInt((cnt-a)/2+1),' ');
+      str = str.padStart(Math.ceil((cnt-a)/2),' ');
     }
     a++;
     if(a % 2 === 0) continue;
