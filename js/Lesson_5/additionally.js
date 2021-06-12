@@ -2,7 +2,7 @@ let num;
 let strout = '';
 num = prompt('Введите число ярусов');
 
-if(isNaN(+num) || +num < 0) {
+if(isNaN(+num) || +num <= 0) {
   alert('Введенное значение (' + num + ') некорректно')
 } else {
   num = +num;
