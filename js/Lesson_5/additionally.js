@@ -19,5 +19,5 @@ if(isNaN(+num) || +num <= 0) {
     strout += str + '\n';
     console.log(str);
   }
+  alert(strout);
 }
-alert(strout);
