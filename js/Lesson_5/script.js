@@ -37,6 +37,7 @@ console.log('summa:',summ);
 //
 //   ** — number ** degree где number это число которое возводится в степень, а degree это сама степень
 
+summ = 0;
 for(let i = 0; i < arr.length; i++) {
   summ += arr[i]**2;
 }
