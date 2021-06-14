@@ -19,9 +19,12 @@ function numPov (num_param, pov_param = 1) {
   return num_param ** pov_param;
 }
 
-let res = numPov(num, pov);
+let res = numPov(num);
 console.log(typeof res);
 if(typeof res === "string") {
   alert(`Ошибка: ${res}`);
 } else
-alert(`Результат: число ${num} в степени ${pov} = ${res}`);
+alert(`Результат: ${res}`);
+
+//======================================================================
+
