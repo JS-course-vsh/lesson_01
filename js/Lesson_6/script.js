@@ -19,7 +19,7 @@ function numPov (num_param, pov_param = 1) {
   return num_param ** pov_param;
 }
 
-let res = numPov(num);
+let res = numPov(num, pov);
 console.log(typeof res);
 if(typeof res === "string") {
   alert(`Ошибка: ${res}`);
@@ -27,4 +27,73 @@ if(typeof res === "string") {
 alert(`Результат: ${res}`);
 
 //======================================================================
+
+// Задание №2
+// Вам нужно написать реализацию функции padString, которая принимает 4 аргумента:
+// строку
+// число, которое является длинной строки, которую мы хотим получить в результате выполнения функции
+// символ (строка длинной 1 символ) — которым дополнится строка, если это будет необходимо
+// параметр булеан (true или false), который определяет, добавлять символы слева или справа (по умолчанию справа)
+// Обязательно при написании функции необходимо проверить аргументы, которые мы передали, и если каких-то аргументов нет, то вернуть из функции строку с ошибкой (return ‘some error’). Сообщение с ошибкой должно быть разное в зависимости от того условия, по которому не прошла проверка.
+//
+//   Результат вызова функции нужно вывести в консоль — после завершения функции.
+
+let flag = true;
+let mess = '';
+
+function errorMessage(param) {
+  return `Параметр \"${param}\" введен неверно или отсутствует!`;
+}
+
+let str = prompt("Введите строку");
+if(!str) {
+  flag = false;
+  mess += errorMessage('строка')+'\n';
+}
+
+let numb = +prompt("Введите число - длинну строки");
+if(!numb || isNaN(numb) || numb < 0) {
+  flag = false;
+  mess += errorMessage('длинна строки')+'\n';
+}
+
+let simb = prompt("Введите символ дополнения");
+if(!simb || simb.length > 1) {
+  flag = false;
+  mess += errorMessage('символ дополнения')+'\n';
+}
+
+let side = prompt("Для добавления символов слева - введите \"0\"; справа - \"1\"");
+if(side !== '1' && side !== '0' && side !== '') {
+  flag = false;
+  mess += errorMessage('сторона добавления символа');
+}
+
+//------------------ function
+
+function padString(p_str, p_numb, p_simb, p_side = '1') {
+
+  if(p_str.length > p_numb) {
+    p_str = p_str.substr(0, p_numb);
+    console.log(p_str)
+    return p_str;
+  } else {
+    if(p_side === '0') {
+      p_str = p_str.padStart(p_numb, p_simb);
+    } else {
+    p_str = p_str.padEnd(p_numb, p_simb)
+    }
+}
+  return p_str;
+}
+
+//------------------ run
+
+if(!flag) {
+  // console.log((`${str}, ${numb}, ${simb}, ${side}`));
+  alert(mess);
+} else {
+  // console.log((`${str}, ${numb}, ${simb}, ${side}`));
+  alert(padString(str, numb, simb, side));
+}
 
