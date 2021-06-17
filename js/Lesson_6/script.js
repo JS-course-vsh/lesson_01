@@ -40,42 +40,50 @@ alert(`Результат: ${res}`);
 
 let flag = true;
 let mess = '';
-
+let str, numb, simb, side;
 function errorMessage(param) {
   return `Параметр \"${param}\" введен неверно или отсутствует!`;
 }
 
-let str = prompt("Введите строку");
+str = prompt("Введите строку");
 if(!str) {
   flag = false;
   mess += errorMessage('строка')+'\n';
 }
 
-let numb = +prompt("Введите число - длинну строки");
+numb = +prompt("Введите число - длинну строки");
 if(!numb || isNaN(numb) || numb < 0) {
   flag = false;
   mess += errorMessage('длинна строки')+'\n';
 }
 
-let simb = prompt("Введите символ дополнения");
-if(!simb || simb.length > 1) {
-  flag = false;
-  mess += errorMessage('символ дополнения')+'\n';
+
+if(numb > str.length) {
+  simb = prompt("Введите символ дополнения");
+  if(!simb || simb.length > 1) {
+    flag = false;
+    mess += errorMessage('символ дополнения')+'\n';
+  }
+
+  side = prompt("Для добавления символов слева - введите \"0\"; справа - \"1\"");
+  if(side !== '1' && side !== '0' && side !== '') {
+    flag = false;
+    mess += errorMessage('сторона добавления символа');
+  }
+  console.log('====', typeof side);
+
+} else {
+  simb = null;
+  side = null;
 }
 
-let side = prompt("Для добавления символов слева - введите \"0\"; справа - \"1\"");
-if(side !== '1' && side !== '0' && side !== '') {
-  flag = false;
-  mess += errorMessage('сторона добавления символа');
-}
 
 //------------------ function
 
-function padString(p_str, p_numb, p_simb, p_side = '1') {
+function padString(p_str, p_numb, p_simb = '', p_side = '1') {
 
   if(p_str.length > p_numb) {
     p_str = p_str.substr(0, p_numb);
-    console.log(p_str)
     return p_str;
   } else {
     if(p_side === '0') {
