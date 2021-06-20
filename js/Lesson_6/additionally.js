@@ -29,7 +29,7 @@ function isNumberInRange(numb) {
  }
 
  console.log(isNumberInRange(3));
- console.log(getDigitsSum(5));
+ console.log(getDigitsSum(555));
  console.log(isEven(22));
 
 
