@@ -16,14 +16,41 @@
 
 
 function mainFunction(collback) {
-  let num = +prompt('Enter a number');
-  let pov = +prompt('Enter the value of the degree');
+  let num = +prompt('Enter a first number');
+  let pov = +prompt('Enter a second number');
   collback(num, pov);
 }
 
-function numPov (a, b) {
+
+function exponentiation (a, b) {
   let result = a ** b;
-  alert(`Result is: ${result}`)
+  let me = arguments.callee.toString();
+  me = me.substr(0, me.indexOf('('));
+  alert(`Result is ${me}: ${result}`);
 }
 
-mainFunction(numPov);
+function multiplay (a, b) {
+  let result = a * b;
+  let me = arguments.callee.toString();
+  me = me.substr(0, me.indexOf('('));
+  alert(`Result is ${me}: ${result}`);
+}
+
+function division (a, b) {
+  let result = a / b;
+  let me = arguments.callee.toString();
+  me = me.substr(0, me.indexOf('('));
+  alert(`Result is ${me}: ${result}`);
+}
+
+function modulo (a, b) {
+  let result = a % b;
+  let me = arguments.callee.toString();
+  me = me.substr(0, me.indexOf('('));
+  alert(`Result is ${me}: ${result}`);
+}
+
+mainFunction(exponentiation);
+mainFunction(multiplay);
+mainFunction(division);
+mainFunction(modulo);
