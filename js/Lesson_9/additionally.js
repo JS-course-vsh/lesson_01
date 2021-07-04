@@ -16,8 +16,8 @@
 
 
 function mainFunction(collback) {
-  let num = prompt('Enter a number');
-  let pov = prompt('Enter the value of the degree');
+  let num = +prompt('Enter a number');
+  let pov = +prompt('Enter the value of the degree');
   collback(num, pov);
 }
 
