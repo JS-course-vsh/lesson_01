@@ -12,7 +12,6 @@
  - Удалить у тега ul аттрибут ‘data-dog-tail‘
  **/
 
-
 let elemUl = document.getElementById('ulId');
 let elemsLi = elemUl.childNodes;
 
