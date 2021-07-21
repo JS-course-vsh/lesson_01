@@ -94,7 +94,7 @@ function createTable(row, col) {
     for(let j = 0; j < col; j++) {
       let td = document.createElement("td");
       td.setAttribute('style', 'padding: 15px')
-      td.innerHTML = ct;
+      td.innerHTML = c;
       tr.append(td);
       c++;
     }
