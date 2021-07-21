@@ -89,14 +89,12 @@ generateList(arr);
 
 function createTable(row, col) {
   let c = 1;
-  let ct = '';
   for(let i = 0; i < row; i++) {
     let tr = document.createElement("tr");
     document.body.append(tr);
     for(let j = 0; j < col; j++) {
       let td = document.createElement("td");
       td.setAttribute('style', 'padding: 15px')
-      ct = '  ' + c;
       td.innerHTML = ct;
       tr.append(td);
       c++;
