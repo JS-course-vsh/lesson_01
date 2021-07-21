@@ -52,3 +52,56 @@ console.log(elemUl.firstElementChild.getAttribute('data-my-name'));
 
 //Удалить у тега ul аттрибут ‘data-dog-tail‘
 elemUl.removeAttribute('data-dog-tail');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/** 2. Написать функцию generateList(array), которая принимает массив из чисел и массивов чисел
+  (например [1,2,3]) и генерирует список из елементов.
+
+ А если в массиве встречается массив (например, [1,2, [1.1,1.2,1.3] ,3]) то делать вложенный список.
+ Для проверки на массив используйте Array.isArray()
+ **/
+
+let arr = [1,2,3,[1.1,1.2,1.3, [1,2,3,[1.1,1.2,1.3] ,3]] ,3];
+
+function generateList(array, elem = document.body) {
+  let ul = document.createElement('ul');
+  for(let i = 0; i < array.length; i++) {
+    let li = document.createElement("li");
+    elem.append(li);
+    if(Array.isArray(array[i])) {
+      li.prepend(ul);
+      generateList(array[i], ul)
+    } else {
+      li.innerHTML = array[i];
+    }
+
+  }
+
+}
+generateList(arr);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+3. Написать функцию, которая выводит таблицу 10 × 10, заполненную числами от 1 до 100
+ */
+
+function createTable(row, col) {
+  let c = 1;
+  let ct = '';
+  for(let i = 0; i < row; i++) {
+    let tr = document.createElement("tr");
+    document.body.append(tr);
+    for(let j = 0; j < col; j++) {
+      let td = document.createElement("td");
+      td.setAttribute('style', 'padding: 15px')
+      ct = '  ' + c;
+      td.innerHTML = ct;
+      tr.append(td);
+      c++;
+    }
+  }
+}
+
+createTable(10, 10);
