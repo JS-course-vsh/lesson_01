@@ -61,13 +61,13 @@ elemUl.removeAttribute('data-dog-tail');
  Для проверки на массив используйте Array.isArray()
  **/
 
-let arr = [1,2,3,[1.1,1.2,1.3, [1,2,3,[1.1,1.2,1.3] ,3]] ,3];
+let arr = [1,2,3,[1.1,1.2,1.3, [1,2,3,[1.1,1.2,1.3] ,3]] ,3, [1,2,3,[1.1,1.2,1.3] ,3]];
 
 function generateList(array, elem = document.body) {
   let ul = document.createElement('ul');
   for(let i = 0; i < array.length; i++) {
     let li = document.createElement("li");
-    elem.append(li);
+    elem.tagName === 'BODY' ? elem.append(ul) : elem.append(li);
     if(Array.isArray(array[i])) {
       li.prepend(ul);
       generateList(array[i], ul)
