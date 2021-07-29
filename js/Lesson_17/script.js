@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     data.forEach(function (item) {
         // document.getElementById('todoItems')
-        const template = createTemplate(item.heading, item.content);
+        const template = createTemplate(item.heading, item.content, item.compl);
         TODO_CONTAINER.prepend(template);
     })
 
@@ -38,16 +38,16 @@ form.addEventListener('submit', function (e) {
 });
 
 TODO_CONTAINER.addEventListener('change', function(e) {
-    console.log(e)
     e.preventDefault();
 
-    // const heading = e.target.querySelector('input[name=title]');
-    // const content = e.target.querySelector('textarea[name=description]');
-    // const chbox = e.target.querySelector('input[name=complit]');
-    // const complete = chbox.checked;
-    // const id_item = new Date().getMilliseconds();
-    //
-    // useStorage(heading.value, content.value, id_item, complete )
+    const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]')).reverse();
+
+    let currItemIndex= chboxs.indexOf(e.target);
+    const storeData = JSON.parse(localStorage.getItem(STORE_ID));
+    storeData[currItemIndex].compl = !storeData[currItemIndex].compl;
+    console.log(storeData[currItemIndex].compl);
+
+    localStorage.setItem(STORE_ID, JSON.stringify(storeData));
 
 })
 
@@ -66,7 +66,7 @@ function useStorage(heading, content, id, compl) {
     return {heading, content, id, compl};
 }
 
-function createTemplate(title, taskBody) {
+function createTemplate(title, taskBody, compl) {
     const mainWrp = document.createElement('div');
     mainWrp.className = 'col-4';
 
@@ -88,6 +88,7 @@ function createTemplate(title, taskBody) {
     taskCheck.name = 'complit';
     taskCheck.type = 'checkbox';
     taskCheck.className = 'form-check-input';
+    taskCheck.checked = compl;
 
     const labelCheck = document.createElement('label');
     labelCheck.className = 'form-check-label';
