@@ -43,7 +43,6 @@ form.addEventListener('submit', function (e) {
 
 TODO_CONTAINER.addEventListener('change', function(e) {
     e.preventDefault();
-    console.log(e);
 
     const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]')).reverse();
 
@@ -62,6 +61,23 @@ button_clear.addEventListener('click', function() {
     console.log('CLEAR');
     document.location.reload();
 })
+
+//-----------------------------------------------------------------------------------------------------
+
+TODO_CONTAINER.addEventListener('click', function(e) {
+    const butts = Array.from(TODO_CONTAINER.querySelectorAll('button[name=delete]')).reverse();
+
+    let currItemIndex= butts.indexOf(e.target);
+    const storeData = JSON.parse(localStorage.getItem(STORE_ID));
+    console.log(currItemIndex);
+    storeData.splice(currItemIndex, 1);
+    console.log(storeData, currItemIndex)
+
+    localStorage.setItem(STORE_ID, JSON.stringify(storeData));
+
+    document.location.reload();
+})
+
 
 //===============================================================================================
 
@@ -113,8 +129,13 @@ function createTemplate(title, taskBody, compl) {
     taskCompl.append(taskCheck);
     taskCompl.append(labelCheck);
 
+    const delButton = document.createElement('button');
+    delButton.type = 'button';
+    delButton.name = 'delete';
+    delButton.className = 'btn-close';
 
     mainWrp.append(taskWrp);
+    taskWrp.append(delButton);
     taskWrp.append(heading);
     taskWrp.append(taskDesc);
     taskWrp.append(taskCompl);
