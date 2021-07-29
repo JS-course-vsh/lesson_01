@@ -1,6 +1,9 @@
 let form = document.getElementById('todoForm');
 const STORE_ID = 'todoItems';
 const TODO_CONTAINER =  document.getElementById('todoItems');
+const button_clear = document.querySelector("button[name=clear]");
+
+//======================================================================================
 
 document.addEventListener('DOMContentLoaded', function () {
     if(!localStorage[STORE_ID]) return;
@@ -8,18 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const data = JSON.parse(localStorage[STORE_ID]);
 
     data.forEach(function (item) {
-        // document.getElementById('todoItems')
         const template = createTemplate(item.heading, item.content, item.compl);
         TODO_CONTAINER.prepend(template);
     })
 
 });
 
+//-------------------------------------------------------------------------------------------
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     const heading = e.target.querySelector('input[name=title]');
     const content = e.target.querySelector('textarea[name=description]');
-    const chbox = e.target.querySelector('input[name=complit]');
     const complete = false;
     const id_item = Math.random().toString();
 
@@ -28,28 +31,39 @@ form.addEventListener('submit', function (e) {
         return;
     }
 
-    const template = createTemplate(heading.value, content.value, id_item, complete);
-    useStorage(heading.value, content.value, id_item, complete )
+    const template = createTemplate(heading.value, content.value, complete);
+    useStorage(heading.value, content.value, id_item, complete)
 
-    // document.getElementById('todoItems')
     TODO_CONTAINER.prepend(template);
 
     e.target.reset();
 });
 
+//---------------------------------------------------------------------------------------------
+
 TODO_CONTAINER.addEventListener('change', function(e) {
     e.preventDefault();
+    console.log(e);
 
     const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]')).reverse();
 
     let currItemIndex= chboxs.indexOf(e.target);
     const storeData = JSON.parse(localStorage.getItem(STORE_ID));
-    storeData[currItemIndex].compl = !storeData[currItemIndex].compl;
-    console.log(storeData[currItemIndex].compl);
+    storeData[currItemIndex].compl = e.target.checked;
 
     localStorage.setItem(STORE_ID, JSON.stringify(storeData));
 
 })
+
+//---------------------------------------------------------------------------------------------------
+
+button_clear.addEventListener('click', function() {
+    localStorage.removeItem(STORE_ID);
+    console.log('CLEAR');
+    document.location.reload();
+})
+
+//===============================================================================================
 
 function useStorage(heading, content, id, compl) {
     // localStorageArray  = 'todoItems'
@@ -65,6 +79,8 @@ function useStorage(heading, content, id, compl) {
     localStorage.setItem(STORE_ID, arr);
     return {heading, content, id, compl};
 }
+
+//-------------------------------------------------------------------------------------------------
 
 function createTemplate(title, taskBody, compl) {
     const mainWrp = document.createElement('div');
