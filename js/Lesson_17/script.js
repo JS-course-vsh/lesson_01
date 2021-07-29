@@ -19,14 +19,17 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
     const heading = e.target.querySelector('input[name=title]');
     const content = e.target.querySelector('textarea[name=description]');
+    const chbox = e.target.querySelector('input[name=complit]');
+    const complete = false;
+    const id_item = Math.random().toString();
 
     if(!heading.value || !content.value) {
         alert('Заполните все поля !!!!');
         return;
     }
 
-    const template = createTemplate(heading.value, content.value);
-    useStorage(heading.value, content.value)
+    const template = createTemplate(heading.value, content.value, id_item, complete);
+    useStorage(heading.value, content.value, id_item, complete )
 
     // document.getElementById('todoItems')
     TODO_CONTAINER.prepend(template);
@@ -34,20 +37,33 @@ form.addEventListener('submit', function (e) {
     e.target.reset();
 });
 
-function useStorage(heading, content) {
+TODO_CONTAINER.addEventListener('change', function(e) {
+    console.log(e)
+    e.preventDefault();
+
+    // const heading = e.target.querySelector('input[name=title]');
+    // const content = e.target.querySelector('textarea[name=description]');
+    // const chbox = e.target.querySelector('input[name=complit]');
+    // const complete = chbox.checked;
+    // const id_item = new Date().getMilliseconds();
+    //
+    // useStorage(heading.value, content.value, id_item, complete )
+
+})
+
+function useStorage(heading, content, id, compl) {
     // localStorageArray  = 'todoItems'
     if(localStorage[STORE_ID]) {
         const storeData = JSON.parse(localStorage.getItem(STORE_ID));
-        storeData.push({heading, content});
+        storeData.push({heading, content, id, compl});
 
         localStorage.setItem(STORE_ID, JSON.stringify(storeData));
         return;
     }
 
-
-    const arr = JSON.stringify([{heading, content}]);
+    const arr = JSON.stringify([{heading, content, id, compl}]);
     localStorage.setItem(STORE_ID, arr);
-    return {heading, content};
+    return {heading, content, id, compl};
 }
 
 function createTemplate(title, taskBody) {
