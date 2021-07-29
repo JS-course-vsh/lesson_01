@@ -70,9 +70,9 @@ TODO_CONTAINER.addEventListener('click', function(e) {
     let currItemIndex= butts.indexOf(e.target);
     const storeData = JSON.parse(localStorage.getItem(STORE_ID));
     console.log(currItemIndex);
-    storeData.splice(currItemIndex, 1);
-    console.log(storeData, currItemIndex)
-
+    if (~currItemIndex) {
+        storeData.splice(currItemIndex, 1);
+    }
     localStorage.setItem(STORE_ID, JSON.stringify(storeData));
 
     document.location.reload();
