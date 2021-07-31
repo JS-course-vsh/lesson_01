@@ -2,6 +2,7 @@ let form = document.getElementById('todoForm');
 const STORE_ID = 'todoItems';
 const TODO_CONTAINER =  document.getElementById('todoItems');
 const button_clear = document.querySelector("button[name=clear]");
+const button_delcompl = document.querySelector("button[name=delcompl]");
 
 //======================================================================================
 
@@ -39,7 +40,7 @@ form.addEventListener('submit', function (e) {
     e.target.reset();
 });
 
-//---------------------------------------------------------------------------------------------
+//----checkboxes---------------------------------------------------------------------------------------
 
 TODO_CONTAINER.addEventListener('change', function(e) {
     e.preventDefault();
@@ -54,7 +55,7 @@ TODO_CONTAINER.addEventListener('change', function(e) {
 
 })
 
-//---------------------------------------------------------------------------------------------------
+//-----clear_list--------------------------------------------------------------------------------------
 
 button_clear.addEventListener('click', function() {
     localStorage.removeItem(STORE_ID);
@@ -62,7 +63,7 @@ button_clear.addEventListener('click', function() {
     document.location.reload();
 })
 
-//-----------------------------------------------------------------------------------------------------
+//------delete_item-----------------------------------------------------------------------------------------------
 
 TODO_CONTAINER.addEventListener('click', function(e) {
     const butts = Array.from(TODO_CONTAINER.querySelectorAll('button[name=delete]')).reverse();
@@ -72,11 +73,21 @@ TODO_CONTAINER.addEventListener('click', function(e) {
     console.log(currItemIndex);
     if (~currItemIndex) {
         storeData.splice(currItemIndex, 1);
+        localStorage.setItem(STORE_ID, JSON.stringify(storeData));
+        document.location.reload();
     }
-    localStorage.setItem(STORE_ID, JSON.stringify(storeData));
 
-    document.location.reload();
 })
+
+//--------delete_complited-------------------------------------------------------------------------
+button_delcompl.addEventListener('click', function() {
+    const storeData = JSON.parse(localStorage[STORE_ID]).filter(el => el.compl === false);
+    console.log(storeData);
+    localStorage.setItem(STORE_ID, JSON.stringify(storeData));
+    document.location.reload();
+
+})
+
 
 
 //===============================================================================================
