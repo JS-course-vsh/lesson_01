@@ -1,6 +1,7 @@
 let form = document.getElementById('todoForm');
 const STORE_ID = 'todoItems';
 const TODO_CONTAINER =  document.getElementById('todoItems');
+const radio_buttons =  document.getElementById('radioButtons');
 const button_clear = document.querySelector("button[name=clear]");
 const button_delcompl = document.querySelector("button[name=delcompl]");
 
@@ -88,6 +89,40 @@ button_delcompl.addEventListener('click', function() {
 
 })
 
+//--------filter_on_radiobutton----------------------------------------------------------------------
+radio_buttons.addEventListener('click', function(e) {
+
+    const data = JSON.parse(localStorage[STORE_ID]);
+
+    if(e.target.value === 'all') {
+        clearDiv(TODO_CONTAINER);
+        data.forEach(function (item) {
+            const template = createTemplate(item.heading, item.content, item.compl);
+            TODO_CONTAINER.prepend(template);
+        })
+        console.log('ALL')
+    }
+    if(e.target.value === 'completed') {
+        clearDiv(TODO_CONTAINER);
+        const data1 = data.filter(el => el.compl === true);
+
+        data1.forEach(function (item) {
+            const template = createTemplate(item.heading, item.content, item.compl);
+            TODO_CONTAINER.prepend(template);
+        })
+        console.log('completed')
+    }
+    if(e.target.value === 'incompleted') {
+        clearDiv(TODO_CONTAINER);
+        const data2 = data.filter(el => el.compl === false);
+
+        data2.forEach(function (item) {
+            const template = createTemplate(item.heading, item.content, item.compl);
+            TODO_CONTAINER.prepend(template);
+        })
+        console.log('incompleted')
+    }
+})
 
 
 //===============================================================================================
@@ -152,4 +187,11 @@ function createTemplate(title, taskBody, compl) {
     taskWrp.append(taskCompl);
 
     return mainWrp;
+}
+//------------------------------------------------------------------------
+
+function clearDiv(elem) {
+    while(elem.firstChild){
+        elem.removeChild(elem.firstChild);
+    }
 }

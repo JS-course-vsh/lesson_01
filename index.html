@@ -23,9 +23,27 @@
                         <label  class="form-label">Task body</label>
                         <textarea name="description" class="form-control" placeholder="Task body" cols="30" rows="10"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create Task!</button>
-                    <button type="button" name="delcompl" class="btn btn-secondary">Delete complites</button>
-                    <button type="button" name="clear" class="btn btn-danger">Clear list</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Create Task!</button>
+                        <button type="button" name="delcompl" class="btn btn-secondary">Delete complites</button>
+                        <button type="button" name="clear" class="btn btn-danger">Clear list</button>
+                    </div>
+                    <br>
+                    <div id="radioButtons">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radios" id="all" value="all" checked>
+                            <label class="form-check-label" for="all"> All tasks </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radios" id="completed" value="completed">
+                            <label class="form-check-label" for="completed"> Completed tasks </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radios" id="incompleted" value="incompleted" >
+                            <label class="form-check-label" for="incompleted"> Incomplete tasks </label>
+                        </div>
+                    </div>
+
                 </form>
             </div>
 
