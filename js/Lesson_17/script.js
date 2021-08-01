@@ -187,7 +187,6 @@ function createTemplate(title, taskBody, compl) {
     taskCompl.append(labelCheck);
 
     const delButton = document.createElement('button');
-    delButton.style.visibility = 'hidden'
     delButton.type = 'button';
     delButton.name = 'delete';
     delButton.className = 'btn-close';
