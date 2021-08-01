@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
         TODO_CONTAINER.prepend(template);
     })
 
+    if(data.some(e => e.compl === true)) {
+        button_delcompl.style.visibility = 'visible';
+    } else {
+        button_delcompl.style.visibility = 'hidden';
+    }
+
 });
 
 //-------------------------------------------------------------------------------------------
@@ -51,8 +57,13 @@ TODO_CONTAINER.addEventListener('change', function(e) {
     let currItemIndex= chboxs.indexOf(e.target);
     const storeData = JSON.parse(localStorage.getItem(STORE_ID));
     storeData[currItemIndex].compl = e.target.checked;
-
     localStorage.setItem(STORE_ID, JSON.stringify(storeData));
+
+    if(storeData.some(e => e.compl === true)) {
+        button_delcompl.style.visibility = 'visible';
+    } else {
+        button_delcompl.style.visibility = 'hidden';
+    }
 
 })
 
@@ -60,7 +71,7 @@ TODO_CONTAINER.addEventListener('change', function(e) {
 
 button_clear.addEventListener('click', function() {
     localStorage.removeItem(STORE_ID);
-    console.log('CLEAR');
+    // console.log('CLEAR');
     document.location.reload();
 })
 
@@ -71,19 +82,19 @@ TODO_CONTAINER.addEventListener('click', function(e) {
 
     let currItemIndex= butts.indexOf(e.target);
     const storeData = JSON.parse(localStorage.getItem(STORE_ID));
-    console.log(currItemIndex);
+    // console.log(currItemIndex);
     if (~currItemIndex) {
         storeData.splice(currItemIndex, 1);
         localStorage.setItem(STORE_ID, JSON.stringify(storeData));
         document.location.reload();
     }
-
 })
 
 //--------delete_complited-------------------------------------------------------------------------
+
 button_delcompl.addEventListener('click', function() {
     const storeData = JSON.parse(localStorage[STORE_ID]).filter(el => el.compl === false);
-    console.log(storeData);
+    // console.log(storeData);
     localStorage.setItem(STORE_ID, JSON.stringify(storeData));
     document.location.reload();
 
@@ -100,7 +111,7 @@ radio_buttons.addEventListener('click', function(e) {
             const template = createTemplate(item.heading, item.content, item.compl);
             TODO_CONTAINER.prepend(template);
         })
-        console.log('ALL')
+        // console.log('ALL')
     }
     if(e.target.value === 'completed') {
         clearDiv(TODO_CONTAINER);
@@ -110,7 +121,6 @@ radio_buttons.addEventListener('click', function(e) {
             const template = createTemplate(item.heading, item.content, item.compl);
             TODO_CONTAINER.prepend(template);
         })
-        console.log('completed')
     }
     if(e.target.value === 'incompleted') {
         clearDiv(TODO_CONTAINER);
@@ -120,9 +130,10 @@ radio_buttons.addEventListener('click', function(e) {
             const template = createTemplate(item.heading, item.content, item.compl);
             TODO_CONTAINER.prepend(template);
         })
-        console.log('incompleted')
+        // console.log('incompleted')
     }
 })
+
 
 
 //===============================================================================================
@@ -170,12 +181,13 @@ function createTemplate(title, taskBody, compl) {
 
     const labelCheck = document.createElement('label');
     labelCheck.className = 'form-check-label';
-    labelCheck.innerText = 'Complited';
+    labelCheck.innerText = 'Completed';
 
     taskCompl.append(taskCheck);
     taskCompl.append(labelCheck);
 
     const delButton = document.createElement('button');
+    delButton.style.visibility = 'hidden'
     delButton.type = 'button';
     delButton.name = 'delete';
     delButton.className = 'btn-close';
