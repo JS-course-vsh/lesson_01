@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-//-------------------------------------------------------------------------------------------
+//-------add_item----------------------------------------------------------------------------
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -79,10 +79,9 @@ button_clear.addEventListener('click', function() {
 
 TODO_CONTAINER.addEventListener('click', function(e) {
     const butts = Array.from(TODO_CONTAINER.querySelectorAll('button[name=delete]')).reverse();
-
-    let currItemIndex= butts.indexOf(e.target);
     const storeData = JSON.parse(localStorage.getItem(STORE_ID));
-    // console.log(currItemIndex);
+    let currItemIndex= butts.indexOf(e.target);
+
     if (~currItemIndex) {
         storeData.splice(currItemIndex, 1);
         localStorage.setItem(STORE_ID, JSON.stringify(storeData));
@@ -125,7 +124,7 @@ radio_buttons.addEventListener('click', function(e) {
     if(e.target.value === 'incompleted') {
         clearDiv(TODO_CONTAINER);
         const data2 = data.filter(el => el.compl === false);
-
+        button_delcompl.style.visibility = 'hidden';
         data2.forEach(function (item) {
             const template = createTemplate(item.heading, item.content, item.compl);
             TODO_CONTAINER.prepend(template);
