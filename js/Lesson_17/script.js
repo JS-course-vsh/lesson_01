@@ -14,7 +14,6 @@ function findWrapper(el) {
     if(el.getAttribute('data-id')) {
         return el;
     }
-
     return findWrapper(el.parentElement);
 }
 
@@ -98,9 +97,7 @@ TODO_CONTAINER.addEventListener('change', function(e) {
     const todoItemId = +todoItem.getAttribute('data-id');
     const status = e.target.checked;
     const todoItems = JSON.parse(localStorage[STORE_ID]);
-
     let currentTodoItem = findElement(todoItems, todoItemId);
-
     currentTodoItem.status = status;
 
     localStorage.setItem(STORE_ID, JSON.stringify(todoItems));
@@ -122,6 +119,7 @@ button_clear.addEventListener('click', function() {
     localStorage.removeItem('ID_counter');
     // TODO_CONTAINER.parentElement.remove();
     TODO_CONTAINER.parentNode.removeChild(TODO_CONTAINER);
+    TODO_CONTAINER.innerHTML = '';
     const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]'));
     visibleBtn(chboxs);
 
@@ -151,6 +149,7 @@ TODO_CONTAINER.addEventListener('click', function(e) {
 
     localStorage.setItem(STORE_ID, JSON.stringify(updatedItems));
     todoItem.parentElement.remove();
+
     const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]'));
     visibleBtn(chboxs);
 
@@ -163,18 +162,18 @@ button_delcompl.addEventListener('click', function() {
     // const storeData = JSON.parse(localStorage[STORE_ID]).filter(el => el.status === false);
     // localStorage.setItem(STORE_ID, JSON.stringify(storeData));
 
-    const todoItems = JSON.parse(localStorage[STORE_ID]);
+    // const todoItems = JSON.parse(localStorage[STORE_ID]);
 
 
 
   let chboxsIncomplete = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]')).filter(el => el.checked === false);
 
     console.log(chboxsIncomplete);
-    // localStorage.setItem(STORE_ID, JSON.stringify(chboxsComplete));
+    localStorage.setItem(STORE_ID, JSON.stringify(chboxsIncomplete));
 
   let chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]'));
 
-    visibleBtn(chboxsIncomplete);
+    visibleBtn(chboxs);
 })
 
 //--------filter_on_radiobutton----------------------------------------------------------------------
@@ -185,30 +184,63 @@ radio_buttons.addEventListener('click', function(e) {
     if(e.target.value === 'all') {
         clearDiv(TODO_CONTAINER);
         data.forEach(function (item) {
-            const template = createTemplate(item.heading, item.content, item.status);
+            const template = createTemplate(item.heading, item.content, item.id, item.status);
             TODO_CONTAINER.prepend(template);
         })
         // console.log('ALL')
     }
     if(e.target.value === 'completed') {
         clearDiv(TODO_CONTAINER);
-        const data1 = data.filter(el => el.compl === true);
-
+        const data1 = data.filter(el => el.status === true);
         data1.forEach(function (item) {
-            const template = createTemplate(item.heading, item.content, item.status);
+            const template = createTemplate(item.heading, item.content, item.id, item.status);
             TODO_CONTAINER.prepend(template);
         })
+        // console.log('completed')
     }
     if(e.target.value === 'incompleted') {
         clearDiv(TODO_CONTAINER);
-        const data2 = data.filter(el => el.compl === false);
+        const data2 = data.filter(el => el.status === false);
         button_delcompl.style.visibility = 'hidden';
         data2.forEach(function (item) {
-            const template = createTemplate(item.heading, item.content, item.status);
+            const template = createTemplate(item.heading, item.content, item.id, item.status);
             TODO_CONTAINER.prepend(template);
         })
         // console.log('incompleted')
     }
+
+    // const chboxs = Array.from(TODO_CONTAINER.querySelectorAll('input[name=complit]'));
+    //
+    //
+    // if(e.target.value === 'all') {
+    //
+    //     console.log('ALL')
+    // }
+    //
+    // if(e.target.value === 'completed') {
+    //     clearDiv(TODO_CONTAINER);
+    //     let cmpl = [...chboxs];
+    //
+    //     cmpl.filter(el => el.checked === true).forEach(function (item) {
+    //             const template = createTemplate(item.heading, item.content, item.status);
+    //             TODO_CONTAINER.prepend(template);
+    //         })
+    //     console.log(chboxs)
+    //     // console.log('completed')
+    // }
+    //
+    // if(e.target.value === 'incompleted') {
+    //     clearDiv(TODO_CONTAINER);
+    //     let incmpl = [...chboxs];
+    //
+    //     incmpl.filter(el => el.checked === false).forEach(function (item) {
+    //         const template = createTemplate(item.heading, item.content, item.status);
+    //         TODO_CONTAINER.prepend(template);
+    //     })
+    //     console.log(chboxs)
+    //     console.log('incompleted')
+    // }
+
 })
 
 
