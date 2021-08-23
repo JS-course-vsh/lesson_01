@@ -30,23 +30,17 @@ console.log('=============================')
 
 function counter(nach = 0, step = 1) {
   let counter = nach;
-  return function() {
-    var val = counter;
-    counter += step;
-    return val;
+   function calk() {
+    return counter += step;
   }
+  function reset() {
+     return counter = 0;
+  }
+
+  return {calk, reset}
 }
 
-var count1 = counter(2, 5);
+let count1 = counter();
 
-console.log(count1());
-console.log(count1());
-console.log(count1());
-console.log('------');
-
-var count2 = counter();
-
-console.log(count2());
-console.log(count2());
-console.log(count2());
-console.log(count2());
+console.log(count1.calk());
+console.log(count1.reset());
