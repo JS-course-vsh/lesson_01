@@ -3,74 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <script src="js/demo.js"></script>-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<main>
-    <h1 class="text-center mt-5 mb-5">TODO LIST</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <form id="todoForm">
-                    <div class="mb-3">
-                        <label class="form-label">Task title</label>
-                        <input type="text" name="title" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label  class="form-label">Task body</label>
-                        <textarea name="description" class="form-control" placeholder="Task body" cols="30" rows="10"></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Create Task</button>
-                        <button type="button" name="clear" class="btn btn-danger">Clear list</button>
-                        <button type="button" name="delcompl" class="btn btn-secondary" style="visibility: hidden">Delete marked</button>
-                    </div>
-                    <br>
-                    <div id="radioButtons">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radios" id="all" value="all" checked>
-                            <label class="form-check-label" for="all"> All tasks </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radios" id="completed" value="completed">
-                            <label class="form-check-label" for="completed"> Completed tasks </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radios" id="incompleted" value="incompleted" >
-                            <label class="form-check-label" for="incompleted"> Incomplete tasks </label>
-                        </div>
-                    </div>
+<script src="js/Lesson_22/script.js"></script>
+<!--<script src="js/Lesson_22/script.js"></script>-->
 
-                </form>
-            </div>
-
-
-            <div class="col-8">
-                <div class="row" id="todoItems">
-
-<!--                    <div class="col-4">-->
-<!--                        <div class="taskWrapper">-->
-<!--                            <div class="taskHeading">Title</div>-->
-<!--                            <div class="taskDescription">Task body</div>-->
-<!--                            <div class="form-check">-->
-<!--                                <input name="complit" type="checkbox" class="form-check-input">-->
-<!--                                <label class="form-check-label" >Complited</label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</main>
-
-
-<script src="js/Lesson_17/script.js"></script>
 </body>
 </html>
